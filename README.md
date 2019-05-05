@@ -6,9 +6,9 @@ Categorized based on keyword
 http://intadd.kr/darkup
 
 
-# tpye of analysis
+# table of Analysis type
 <img src="http://intadd.kr/darkup/image/t.png">
 
 
-# ?
+# DFD?
 <img src="http://intadd.kr/darkup/image/p.png">
