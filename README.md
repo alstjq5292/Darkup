@@ -4,3 +4,6 @@ Categorized based on keyword
 
 # View
 http://intadd.kr/darkup
+
+
+# tpye of analysis
