@@ -12,3 +12,6 @@
 
 # DFD?
 <img src="http://intadd.kr/darkup/image/p.png">
+
+# Performance
+Darkup can find about 3,000 web pages that alive server in 24 hours
