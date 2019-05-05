@@ -3,12 +3,9 @@ import socks
 import time
 import zlib
 import re
-import socket
-#My module start
 import webengine
 import language
 import category_
-#My moudle end 
 from urllib.parse import unquote
 from bs4 import BeautifulSoup
 from pytz import timezone
@@ -44,13 +41,10 @@ def category_return(text,languages_code):
 		category,keywords=category_.analysis(text).enC()
 
 	if(category!='unknown'):
-		keywrods_str=list(set(keywords))
-		keywords_str=''
-		for i in keywords:
-			keywords_str+=i+','
-		keywords_str=keywords_str[:-1]
-
-	return(category,keywords)
+		keywrods=list(set(keywords))
+		keyword_str=','.join(list(set(keywords)))
+	
+	return(category,keyword_str)
 	
 	
 def analysis(url):
@@ -111,7 +105,6 @@ def analysis(url):
 				url_box=list(set(url_box))
 			onion_box=[]
 
-			keywords=','.join(list(set(keywords)))
 			for url_one in url_box:
 					if(re.findall(ANY_URL_REGEX,url_one)!=[]):
 						if(url_one.find('.onion')>=0):
@@ -139,8 +132,6 @@ def report (url,engine, recursion_count):
 	if(status!='unknown'):
 		data={'category':category,'keyword':keywords,'engine':engine,'url':url,'time':nowtime,'state':status,'server':server,'code':str(code),'title':title,'language1':language1,'language2':language2,'language3':language3,'password':password}
 		res=requests.post('http://intadd.kr/darkup/saveinfo.php',data=data)
-		print (res)
-		print (url)
 		if(recursion_count<=2 and type(url_box)==list):
 			if(url in url_box):
 				url_box.remove(url)
@@ -162,9 +153,7 @@ def main  ():
 				search_class=webengine.onion_parser(Word,session)
 				dicts={}
 				torSearchvalue={'torSearch':search_class.torSearch()}
-				print ('tordone')
 				candlevalue={'candle':search_class.candle()}
-				print ('candle done')
 				dicts.update(webengine.Deduplication(torSearchvalue,candlevalue,'init'))
 				dicts.update(webengine.Deduplication(dicts,{'ahmia':search_class.ahmia()},'combine'))
 				dicts.update(webengine.Deduplication(dicts,{'visitor':search_class.visitor()},'combine'))
